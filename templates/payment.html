@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+		<!-- Breadcrumbs -->
+<div class="breadcrumbs" xmlns="http://www.w3.org/1999/html">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="bread-inner">
+							<ul class="bread-list">
+								<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
+								<li class="active"><a href="blog-single.html">Checkout</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumbs -->
+
+		<!-- Start Checkout -->
+		<section class="shop checkout section">
+			<div class="container">
+					<div class="row">
+						<div class="col-lg-8 col-12">
+							<div class="checkout-form">
+								<h2>Make Your Checkout Here</h2>
+								<p>Please Shipping address in order to checkout more quickly</p>
+								{% if messages %}
+								{% for message in messages %}
+								<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+								  {{ message }}
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								{% endfor %}
+								{% endif %}
+								<!-- Form -->
+								<form action="{% url 'khalti' %}" class="form" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									{{khalti.as_p}}
+									<div class="container">
+										<div class="row">
+											<div class="inner">
+												<div class="single-widget get-button">
+													<div class="col-12">
+														<div class="button">
+															<button type="submit" class="btn" style="width: 200%;">proceed to Pay</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</form>
+							<!--/ End Form -->
+						</div>
+					</div>
+
+						<div class="col-lg-4 col-12">
+							<div class="order-details">
+								{% include 'order_snippet.html' %}
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<!--/ End Checkout -->
+
+		<!-- Start Shop Services Area  -->
+		<section class="shop-services section home">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-rocket"></i>
+							<h4>Free shiping</h4>
+							<p>Orders over $100</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-reload"></i>
+							<h4>Free Return</h4>
+							<p>Within 30 days returns</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-lock"></i>
+							<h4>Sucure Payment</h4>
+							<p>100% secure payment</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-tag"></i>
+							<h4>Best Peice</h4>
+							<p>Guaranteed price</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Shop Services -->
+
+		<!-- Start Shop Newsletter  -->
+		<section class="shop-newsletter section">
+			<div class="container">
+				<div class="inner-top">
+					<div class="row">
+						<div class="col-lg-8 offset-lg-2 col-12">
+							<!-- Start Newsletter Inner -->
+							<div class="inner">
+								<h4>Newsletter</h4>
+								<p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+								<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+									<input name="EMAIL" placeholder="Your email address" required="" type="email">
+									<button class="btn">Subscribe</button>
+								</form>
+							</div>
+							<!-- End Newsletter Inner -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Shop Newsletter -->
+{% endblock %}
+{% block js %}
+<script>
+	var hideable_shipping_form = $('.hideable_shipping_form');
+
+	var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
+
+	use_default_shipping.addEventListener('change', function () {
+	  if (this.checked) {
+		hideable_shipping_form.hide();
+	  } else {
+		hideable_shipping_form.show();
+	  }
+	})
+
+  </script>
+{% endblock %}
